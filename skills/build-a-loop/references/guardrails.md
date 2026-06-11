@@ -27,15 +27,27 @@ Default to the longest interval that still works: daily-granularity problems
 get daily loops, not 5-minute loops. Anything more frequent than every 30
 minutes needs a stated reason. Each run costs tokens and attention.
 
-## Headless-auth check before any cron launch
+## Headless check before any unattended launch
 
-Exercise each needed tool the way the cron job will run it before creating
-the job. If a tool needs interactive auth, redesign, fall back to an
-in-session `/loop`, or make the loop owner-triggered (see engines.md).
-Never launch a loop that will silently fail at 9am.
+Two proofs before trusting any schedule: (1) the machine's plumbing probe
+has passed for the current claude version (see engines.md — Keychain
+auth, binary path, logs under real launchd conditions), and (2) every
+tool the iteration needs has been exercised headless, the way the job
+will run it, and is covered by the plist's allowlist. If either fails,
+redesign, fall back to an in-session `/loop`, or make the loop
+owner-triggered (see engines.md). Never launch a loop that will silently
+fail at 9am.
 
 ## One owner per loop
 
 A loop belongs to the person who built it; the card names them. Teammates
 who want it get a copy of the card, not a shared job — shared jobs rot
 because nobody owns the failure.
+
+## Every unattended loop must be visible to loop-status
+
+An unattended loop must follow the five-artifact convention (card, plist
+label `com.claude-loops.<name>`, logs, state, output — see engines.md) so
+the loop-status skill can see it. A loop the overview cannot see is a
+loop that can fail silently. Tell every owner the health check: say
+"show my loops".
