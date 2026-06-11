@@ -13,7 +13,17 @@ a teammate can run their own copy.
 
 ## Install
 
-Clone this repo and start Claude Code with the plugin:
+From inside Claude Code:
+
+```
+/plugin marketplace add syerad/claude-skill-loops
+/plugin install loops@claude-skill-loops
+```
+
+To pick up new versions later: `/plugin marketplace update claude-skill-loops`
+(or enable auto-update for this marketplace in the `/plugin` UI).
+
+For development, run straight from a checkout instead:
 
 ```
 git clone https://github.com/syerad/claude-skill-loops.git
@@ -25,6 +35,9 @@ Then start with:
 ```
 /loops:build-a-loop I keep doing <annoying thing> every <week/day/...>
 ```
+
+Check on your loops any time with `/loops:loop-status` — or just say
+"show my loops".
 
 ## What's inside
 

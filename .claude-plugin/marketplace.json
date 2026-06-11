@@ -1,0 +1,12 @@
+{
+  "name": "claude-skill-loops",
+  "owner": { "name": "Raphael Syed" },
+  "description": "Build, run, and monitor automated loops for Claude Code",
+  "plugins": [
+    {
+      "name": "loops",
+      "source": "./",
+      "description": "Turn recurring chores and hard problems into well-designed loops: build-a-loop compiles and launches them (launchd-backed unattended scheduling), loop-status reports their health."
+    }
+  ]
+}
