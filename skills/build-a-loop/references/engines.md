@@ -81,10 +81,16 @@ Key mechanics:
 - **`dontAsk` + per-loop `--allowedTools`.** Least privilege. Enumerate
   every command and tool the card's Iteration steps invoke, as concrete
   rules (`Bash(<command prefix>:*)`, `Read(//abs/path/**)`,
-  `Write(//abs/path/**)`, tool names like `PushNotification`). An
-  unlisted tool makes the run error loudly (non-zero exit → `.err`) —
-  never hang. If the owner later edits the card to need new tools, the
-  allowlist must be refreshed: tell them to ask Claude to update it.
+  `Write(//abs/path/**)`, tool names like `PushNotification`). Compound
+  commands are split for permission checks: `cd X && ./run Y` needs the
+  parts allowed separately (`Bash(cd:*)`, `Bash(./run:*)`) — one rule
+  containing `&&` never matches. Always validate the list with a
+  headless dry-run before installing. An unlisted tool is denied, never
+  prompts or hangs — but the run may still exit 0 with the model
+  narrating the denial, so don't rely on exit codes alone: a denied
+  iteration writes no state, and loop-status reports it as overdue. If
+  the owner later edits the card to need new tools, the allowlist must
+  be refreshed: tell them to ask Claude to update it.
 - **Failure wrapper.** The `|| { echo FAILED …; osascript …; }` tail
   covers the class where `claude` itself cannot run (auth broke, binary
   moved): the owner gets a macOS notification and `.err` gets a marker
