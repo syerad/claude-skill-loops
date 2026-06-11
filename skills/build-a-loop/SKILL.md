@@ -79,14 +79,15 @@ they say the output is genuinely useful. Never skip this step; this is where the
 ### 6. Pre-launch check
 Read `references/engines.md` (confirm the engine picked in step 4 and
 follow its mechanics) and `references/guardrails.md` (apply every
-guardrail). For unattended cron loops: exercise each tool the iteration
-needs the way the cron job will (headless — interactive-auth MCP servers
-often fail there; see engines.md for testing send-capable tools without
-messaging third parties). If anything fails, redesign — different data
-source, an
-in-session loop, or an owner-triggered manual loop (see engines.md) — and
-re-confirm the changed design with the person. Never launch a loop that
-will silently fail.
+guardrail). For unattended (launchd) loops: run the once-per-machine
+plumbing probe if not yet recorded, derive the `--allowedTools` list by
+enumerating every command and tool the card's Iteration steps invoke,
+and exercise each tool headless the way the job will run it
+(interactive-auth MCP servers often fail there; see engines.md for
+testing send-capable tools without messaging third parties). If anything
+fails, redesign — different data source, an in-session loop, or an
+owner-triggered manual loop (see engines.md) — and re-confirm the changed
+design with the person. Never launch a loop that will silently fail.
 
 ### 7. Save the loop card
 Save the card to `~/.claude/loops/<kebab-case-name>.md` (create the
@@ -100,8 +101,9 @@ Measurement: <successful iteration looks like X; stay silent when Y;
               iterative loops: terminate when Z>
 Iteration:   <numbered steps each cycle: check what, where, do what,
               output where>
-Engine:      <cron: <schedule, in plain words> | /loop <interval> |
-              self-paced | owner-triggered>
+Engine:      <launchd: <schedule, in plain words> · label
+              com.claude-loops.<name> | /loop <interval> | self-paced |
+              owner-triggered>
 Needs:       <tools/integrations/auth required>
 State:       <path to state file if the loop tracks what it already did,
               e.g. ~/.claude/loops/state/<name>.md — or "none">
@@ -116,9 +118,12 @@ the card alone.
 ### 8. Launch and hand off
 The card now exists, so the loop can point at it:
 
-- Recurring, must run unattended → create the cron job. Its prompt is
-  exactly: `Read ~/.claude/loops/<name>.md and execute one iteration per its
-  instructions.`
+- Recurring, must run unattended → with the person's consent (it writes
+  system state), install the launchd job per engines.md: write the plist
+  (its `claude -p` prompt is exactly `Read ~/.claude/loops/<name>.md and
+  execute one iteration per its instructions.`), bootstrap it, and
+  confirm the plumbing probe has passed. Tell them logs live in
+  `~/.claude/loops/logs/` and the health check is saying "show my loops".
 - Recurring, only matters while they're working → tell them to run
   `/loop <interval>` with the same card-reading prompt, and that it stops
   when the session closes.
