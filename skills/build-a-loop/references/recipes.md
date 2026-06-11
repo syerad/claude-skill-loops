@@ -10,7 +10,7 @@ Needs / Output.
 ---
 
 ## Weekly-update completion chaser
-Roles: EM · Type: recurring (cron, Mondays)
+Roles: EM · Type: recurring (scheduled, Mondays)
 - Problem: Chasing direct reports for weekly updates eats Monday mornings.
 - Measurement: Every missing update gets exactly one nudge; silent if
   everyone submitted; owner pinged only with the still-missing list.
@@ -20,7 +20,7 @@ Roles: EM · Type: recurring (cron, Mondays)
 - Needs: Google Drive, Slack. Output: Slack DMs.
 
 ## PR review SLA watcher
-Roles: EM, IC eng · Type: recurring (cron, weekday mornings)
+Roles: EM, IC eng · Type: recurring (scheduled, weekday mornings)
 - Problem: PRs sit unreviewed past the team's 24h norm.
 - Measurement: Each PR >24h without review gets exactly one nudge to its
   reviewers; silent when none qualify.
@@ -29,7 +29,7 @@ Roles: EM, IC eng · Type: recurring (cron, weekday mornings)
 - Needs: GitHub, Slack. Output: Slack channel or DMs.
 
 ## Stale-PR pruner
-Roles: IC eng · Type: recurring (cron, weekly)
+Roles: IC eng · Type: recurring (scheduled, weekly)
 - Problem: Dead PRs pile up and bury the active ones.
 - Measurement: Every PR idle >30 days gets listed with a recommended action
   (close/rebase/ping); the loop recommends, never closes; silent when no
@@ -60,7 +60,7 @@ Roles: IC eng · Type: iterative (self-paced)
   numbers.
 
 ## Morning support-queue digest
-Roles: Support · Type: recurring (cron, daily)
+Roles: Support · Type: recurring (scheduled, daily)
 - Problem: Mornings start with manually triaging the overnight queue.
 - Measurement: Digest contains only tickets needing action today (escalation
   risk, VIP, >24h waiting); silent if the queue is clean.
@@ -78,7 +78,7 @@ Roles: Support, EM · Type: recurring (in-session /loop, 30m, during shift)
 - Needs: Zendesk. Output: Slack.
 
 ## Competitor changelog watcher
-Roles: PM · Type: recurring (cron, weekly)
+Roles: PM · Type: recurring (scheduled, weekly)
 - Problem: Competitor releases get noticed weeks late.
 - Measurement: Only genuinely new items since last run; silent if nothing
   shipped.
@@ -88,7 +88,7 @@ Roles: PM · Type: recurring (cron, weekly)
 - Needs: web access. Output: Slack or doc.
 
 ## Metrics anomaly digest
-Roles: PM, EM · Type: recurring (cron, daily)
+Roles: PM, EM · Type: recurring (scheduled, daily)
 - Problem: Dashboard checking is manual and skipped on busy days.
 - Measurement: Reports only metrics outside their normal band (define the
   band per metric in the card); silent when all normal.
@@ -106,7 +106,7 @@ Roles: Marketing · Type: iterative (self-paced)
 - Needs: the draft file/doc. Output: revised draft + checklist results.
 
 ## Campaign link health check
-Roles: Marketing · Type: recurring (cron, daily during campaign)
+Roles: Marketing · Type: recurring (scheduled, daily during campaign)
 - Problem: A live campaign's links can break or underperform unnoticed.
 - Measurement: Flags only links that error or fall below the click threshold
   in the card; silent when healthy.
@@ -115,7 +115,7 @@ Roles: Marketing · Type: recurring (cron, daily during campaign)
 - Needs: link/campaign analytics, web. Output: Slack.
 
 ## Channel triage digest
-Roles: anyone · Type: recurring (cron, daily)
+Roles: anyone · Type: recurring (scheduled, daily)
 - Problem: A busy Slack channel buries the messages that actually need you.
 - Measurement: Digest lists only items needing the owner's reply or decision;
   silent if nothing does.

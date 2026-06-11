@@ -68,7 +68,10 @@ NOT expand `~` — use absolute paths; escape `&` as `&amp;` in XML):
     </plist>
 
 (The ProgramArguments command is ONE plist string; the line breaks above
-are for readability — keep it on one line in the real file.)
+are for readability — keep it on one line in the real file.
+StartCalendarInterval takes one dict or an array of dicts: "every
+weekday at 8:30" is five dicts, Weekday 1-5, each with Hour 8 / Minute
+30; omit Weekday entirely for every day.)
 
 Key mechanics:
 

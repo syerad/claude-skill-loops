@@ -39,8 +39,9 @@ Run these (substitute the real home directory):
    state nor log shows a run. (This is the silent-failure catch: machine
    off, job unloaded by an OS update, allowlist drift.)
 3. **paused** — plist exists but its label is not in `launchctl list`.
-4. **not scheduled** — card exists, no plist: fine if Engine says
-   owner-triggered or self-paced (say so); flag as orphaned otherwise.
+4. **not scheduled** — card exists, no plist, and Engine is not
+   in-session: fine if Engine says owner-triggered or self-paced (say
+   so); flag as orphaned otherwise.
 5. **in-session** — Engine is `/loop` or an in-session scheduled task:
    report honestly that liveness cannot be verified from outside that
    session.

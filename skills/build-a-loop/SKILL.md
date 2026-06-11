@@ -83,8 +83,9 @@ guardrail). For unattended (launchd) loops: run the once-per-machine
 plumbing probe if not yet recorded, derive the `--allowedTools` list by
 enumerating every command and tool the card's Iteration steps invoke,
 and exercise each tool headless the way the job will run it
-(interactive-auth MCP servers often fail there; see engines.md for
-testing send-capable tools without messaging third parties). If anything
+(interactive-auth MCP servers often fail there; exercise send-capable
+tools by sending only to the owner or a test target, never to third
+parties). If anything
 fails, redesign — different data source, an in-session loop, or an
 owner-triggered manual loop (see engines.md) — and re-confirm the changed
 design with the person. Never launch a loop that will silently fail.
