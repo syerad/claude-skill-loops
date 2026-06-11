@@ -1,7 +1,12 @@
 # Unattended engine (launchd) + loop status overview — design
 
 Date: 2026-06-11
-Status: approved
+Status: implemented 2026-06-12. Empirical correction during implementation:
+a `dontAsk` tool denial does NOT reliably produce a non-zero exit (the
+model may narrate the denial and exit 0) — denied iterations are caught
+by loop-status's overdue check, not the `.err` wrapper; engines.md
+documents the accurate behavior. Compound allowlist rules containing
+`&&` never match (commands are split per part).
 Owner: Raphael Syed
 
 ## Problem

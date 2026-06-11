@@ -87,8 +87,9 @@ Key mechanics:
   containing `&&` never matches. Always validate the list with a
   headless dry-run before installing. An unlisted tool is denied, never
   prompts or hangs — but the run may still exit 0 with the model
-  narrating the denial, so don't rely on exit codes alone: a denied
-  iteration writes no state, and loop-status reports it as overdue. If
+  narrating the denial, and on exit 0 the plist's `||` failure wrapper
+  does not fire: a denied iteration writes no state, and loop-status's
+  overdue check is what catches it. If
   the owner later edits the card to need new tools, the allowlist must
   be refreshed: tell them to ask Claude to update it.
 - **Failure wrapper.** The `|| { echo FAILED …; osascript …; }` tail
