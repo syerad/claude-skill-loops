@@ -77,7 +77,18 @@ Key mechanics:
 
 - **No `--bare`.** Bare mode skips Keychain/OAuth; subscription login
   requires a normal headless run. PATH in the plist must include the
-  directory containing the `claude` binary (`which claude`).
+  directory containing the `claude` binary (`which claude`) AND the
+  directory of every binary the card's commands shell out to — check
+  each with `which`. launchd's environment is not your shell: a loop
+  has failed in the field because `gcloud` lived under /opt/homebrew
+  and only the terminal PATH knew it. The step-6 dry-run only proves
+  permissions; to prove PATH, run the dry-run with `env PATH=<exact
+  plist PATH>` prefixed.
+- **Notify via the OS, not the harness.** The PushNotification tool
+  does not deliver from headless runs (verified). Any "notify the
+  owner" step in a card destined for launchd must use
+  `osascript -e 'display notification …'` (macOS) or `notify-send`
+  (Linux), with `Bash(osascript:*)` in the allowlist.
 - **`dontAsk` + per-loop `--allowedTools`.** Least privilege. Enumerate
   every command and tool the card's Iteration steps invoke, as concrete
   rules (`Bash(<command prefix>:*)`, `Read(//abs/path/**)`,
