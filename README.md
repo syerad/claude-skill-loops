@@ -144,7 +144,9 @@ top, run state in `state/`, logs in `logs/`, reports in `output/`.
 
 New versions are picked up with `/plugin marketplace update
 claude-skill-loops`, or enable auto-update for this marketplace in the
-`/plugin` UI. For development, run from a checkout instead:
+`/plugin` UI. (Maintainers: installed copies only update when the
+`version` in `.claude-plugin/plugin.json` changes — bump it with every
+release.) For development, run from a checkout instead:
 
 ```
 git clone https://github.com/syerad/claude-skill-loops.git
