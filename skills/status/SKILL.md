@@ -1,7 +1,8 @@
 ---
 name: status
 description: >
-  Show every loop built with the build skill and whether it is healthy.
+  Loops plugin — health overview. Show every loop built with the build
+  skill and whether it is healthy.
   Reads loop cards, launchd jobs, state files, and logs, then reports
   schedule, last run, last result, next due, and a health verdict per
   loop. Trigger on "show my loops", "loop status", "are my loops

@@ -1,6 +1,6 @@
 {
   "name": "loops",
   "description": "Turn recurring chores and hard problems into well-designed loops. Interviews you about a problem, compiles a tested loop prompt, and launches it on the right engine.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": { "name": "Raphael Syed" }
 }

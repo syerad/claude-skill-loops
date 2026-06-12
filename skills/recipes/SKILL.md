@@ -1,7 +1,7 @@
 ---
 name: recipes
 description: >
-  Browse the loop recipe gallery: proven loop shapes (digests, watchers,
+  Loops plugin — recipe gallery. Browse proven loop shapes (digests, watchers,
   chasers, polishers, optimizers) and what each one solves. Trigger on
   "show loop recipes", "what recipes are there", "what loops could I
   build", "loop ideas", "browse recipes", or when someone wants
