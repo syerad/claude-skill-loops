@@ -89,10 +89,41 @@ Key mechanics:
   owner" step in a card destined for launchd must use
   `osascript -e 'display notification …'` (macOS) or `notify-send`
   (Linux), with `Bash(osascript:*)` in the allowlist.
+- **Headless runs cannot use the Write/Edit tools.** Verified (Claude
+  Code 2.1.173, via launchd and nested): in `claude -p` the Write and
+  Edit tools are denied regardless of permission mode (`dontAsk`,
+  `acceptEdits`) and regardless of allow rules, whether passed as
+  flags or settings. Spawned processes are NOT tool-gated (a binary
+  the card runs writes its own files freely), so loops write through
+  a small allowlisted helper instead. Create it once per machine at
+  `~/.claude/loops/bin/save`, `chmod +x` it, and allow it with both
+  `Bash(~/.claude/loops/bin/save:*)` and the absolute-path form:
+
+      #!/bin/sh
+      # Write stdin to a file under ~/.claude/loops — the only write
+      # path granted to headless loop runs.
+      set -eu
+      base="$HOME/.claude/loops"
+      append=false
+      if [ "${1:-}" = "-a" ]; then append=true; shift; fi
+      rel="${1:?usage: save [-a] <path-relative-to-loops-dir>}"
+      case "$rel" in
+        /*|*..*) echo "save: path must be relative to $base, no '..'" >&2; exit 1;;
+      esac
+      dest="$base/$rel"
+      mkdir -p "$(dirname "$dest")"
+      if [ "$append" = true ]; then cat >> "$dest"; else cat > "$dest"; fi
+      echo "saved: $dest"
+
+  Cards write via heredoc (the command must START with the helper
+  path so the allow rule matches):
+  `~/.claude/loops/bin/save output/report.md <<'EOF' … EOF`,
+  append with `-a`. The step-6 dry-run must exercise one write
+  through the helper — a read-only dry-run validates only half the
+  allowlist.
 - **`dontAsk` + per-loop `--allowedTools`.** Least privilege. Enumerate
   every command and tool the card's Iteration steps invoke, as concrete
-  rules (`Bash(<command prefix>:*)`, `Read(//abs/path/**)`,
-  `Write(//abs/path/**)`, tool names like `PushNotification`). Compound
+  rules (`Bash(<command prefix>:*)`, `Read(//abs/path/**)`). Compound
   commands are split for permission checks: `cd X && ./run Y` needs the
   parts allowed separately (`Bash(cd:*)`, `Bash(./run:*)`) — one rule
   containing `&&` never matches. Always validate the list with a
