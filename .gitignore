@@ -2,3 +2,4 @@ work/
 tasks/
 .claude/
 .DS_Store
+*.csv
