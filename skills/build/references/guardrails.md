@@ -44,10 +44,10 @@ A loop belongs to the person who built it; the card names them. Teammates
 who want it get a copy of the card, not a shared job — shared jobs rot
 because nobody owns the failure.
 
-## Every unattended loop must be visible to loop-status
+## Every unattended loop must be visible to the status skill
 
 An unattended loop must follow the five-artifact convention (card, plist
 label `com.claude-loops.<name>`, logs, state, output — see engines.md) so
-the loop-status skill can see it. A loop the overview cannot see is a
+the status skill can see it. A loop the overview cannot see is a
 loop that can fail silently. Tell every owner the health check: say
 "show my loops".

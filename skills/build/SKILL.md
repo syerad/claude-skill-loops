@@ -1,5 +1,5 @@
 ---
-name: build-a-loop
+name: build
 description: Use when someone wants to automate a recurring task, set up a monitor/digest/reminder, or solve a hard problem by iterating until it's done — triggers include "build a loop", "automate this", "I keep doing X every week", "can Claude check Y every morning", "keep improving Z until it passes". Works for non-coding tasks (inbox digests, report chasing, content QA) as well as engineering tasks.
 ---
 

@@ -1,7 +1,7 @@
 ---
-name: loop-status
+name: status
 description: >
-  Show every loop built with build-a-loop and whether it is healthy.
+  Show every loop built with the build skill and whether it is healthy.
   Reads loop cards, launchd jobs, state files, and logs, then reports
   schedule, last run, last result, next due, and a health verdict per
   loop. Trigger on "show my loops", "loop status", "are my loops
@@ -65,4 +65,4 @@ gui/$(id -u)/com.claude-loops.<name>`; resume = `launchctl bootstrap
 gui/$(id -u) <plist>`; pause = `launchctl bootout …`; allowlist drift =
 regenerate the plist's --allowedTools from the card and re-bootstrap.
 
-If there are no loops at all, say so and point at `/loops:build-a-loop`.
+If there are no loops at all, say so and point at `/loops:build`.

@@ -16,7 +16,7 @@ this — you apply it and explain the result in plain words.
 This is real OS-level scheduling: it fires with no Claude session open.
 The laptop must be awake or asleep (launchd runs a missed
 StartCalendarInterval once on wake); fire times missed while powered off
-are skipped — the loop-status skill catches those as "overdue".
+are skipped — the status skill catches those as "overdue".
 
 Every unattended loop named `<name>` owns five artifacts:
 
@@ -130,14 +130,14 @@ Key mechanics:
   headless dry-run before installing. An unlisted tool is denied, never
   prompts or hangs — but the run may still exit 0 with the model
   narrating the denial, and on exit 0 the plist's `||` failure wrapper
-  does not fire: a denied iteration writes no state, and loop-status's
+  does not fire: a denied iteration writes no state, and the status skill's
   overdue check is what catches it. If
   the owner later edits the card to need new tools, the allowlist must
   be refreshed: tell them to ask Claude to update it.
 - **Failure wrapper.** The `|| { echo FAILED …; osascript …; }` tail
   covers the class where `claude` itself cannot run (auth broke, binary
   moved): the owner gets a macOS notification and `.err` gets a marker
-  line loop-status can read. Failures *inside* the iteration are the
+  line the status skill can read. Failures *inside* the iteration are the
   card's job (its own "notify owner on failure" step).
 - **Plumbing probe, once per machine.** Before trusting the first
   launchd loop: install a temporary job (label `com.claude-loops.probe`,

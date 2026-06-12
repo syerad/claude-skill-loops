@@ -1,9 +1,10 @@
 # claude-skill-loops
 
-A Claude Code plugin with two skills. `build-a-loop` turns a recurring chore
-or a grind-until-it-passes goal into a loop that Claude runs on a schedule or
-in your session. `loop-status` tells you whether your loops actually ran and
-what went wrong if they didn't.
+A Claude Code plugin with three skills. `/loops:build` turns a recurring
+chore or a grind-until-it-passes goal into a loop that Claude runs on a
+schedule or in your session. `/loops:status` tells you whether your loops
+actually ran and what went wrong if they didn't. `/loops:recipes` shows the
+gallery of proven loop shapes.
 
 The core idea: a loop is a markdown file, called a loop card, stored in
 `~/.claude/loops/`. The card states the problem, what a successful run looks
@@ -23,7 +24,7 @@ Inside Claude Code:
 Then describe the thing that keeps eating your time:
 
 ```
-/loops:build-a-loop every Friday I chase my team for status updates
+/loops:build every Friday I chase my team for status updates
 ```
 
 Claude asks a few questions (how often, where the data lives, what useful
@@ -32,12 +33,12 @@ judge the real output before anything is scheduled, and then launches it.
 Check on your loops any time:
 
 ```
-/loops:loop-status
+/loops:status
 ```
 
 or just say "show my loops".
 
-## What build-a-loop builds
+## What the build skill builds
 
 **Recurring loops.** Digests, watchers, reminders, report chasers. Anything
 that repeats on a clock. Every recurring loop must define a silence
@@ -54,7 +55,7 @@ checks the condition, and stops when it holds (or when a stop rule like
 judgment every time, the skill says so and offers to just do it now instead.
 It will not build a loop nobody needs.
 
-The skill ships a recipe gallery (`skills/build-a-loop/references/recipes.md`)
+The skill ships a recipe gallery (`skills/build/references/recipes.md`)
 with proven shapes: PR review SLA watcher, support queue digest, competitor
 changelog watcher, metrics anomaly digest, campaign link health check, and
 more. Browse it any time with `/loops:recipes` (or ask "what loops could I
@@ -85,15 +86,15 @@ launchd, so nothing is scheduled on assumptions.
 
 Honest limits: unattended scheduling is implemented for macOS. The machine
 can be asleep at fire time (the job runs on wake) but not powered off; a
-fire time missed while powered off shows up as overdue in loop-status
-instead of disappearing. Linux works with the same command in a user
+fire time missed while powered off shows up as overdue in the status
+skill instead of disappearing. Linux works with the same command in a user
 crontab, described briefly in the engine docs but not yet field-tested.
 Cloud-hosted scheduling (Anthropic Routines) is deliberately not used: it
 has no access to local files, and loops are built on local cards and state.
 
 ## Knowing your loops are alive
 
-`loop-status` reads every card and cross-checks it against the scheduler,
+`/loops:status` reads every card and cross-checks it against the scheduler,
 state files, and logs, then gives each loop one verdict:
 
 - **failing** - the log shows errors for the most recent run
@@ -129,12 +130,13 @@ top, run state in `state/`, logs in `logs/`, reports in `output/`.
 
 ## What's in the repo
 
-- `skills/build-a-loop/SKILL.md` - the guided journey from problem to
+- `skills/build/SKILL.md` - the guided journey from problem to
   running loop
-- `skills/build-a-loop/references/` - recipe gallery, engine mechanics
+- `skills/build/references/` - recipe gallery, engine mechanics
   (including the launchd plist template), prompt patterns for iteration
   steps, guardrails
-- `skills/loop-status/SKILL.md` - the health overview
+- `skills/status/SKILL.md` - the health overview
+- `skills/recipes/SKILL.md` - the recipe browser
 - `docs/superpowers/` - design specs and implementation plans for the
   plugin itself
 
@@ -152,5 +154,5 @@ claude --plugin-dir /path/to/claude-skill-loops
 ## Contributing a recipe
 
 Built a loop your team copies? Add its card to
-`skills/build-a-loop/references/recipes.md` in the existing format (Roles,
+`skills/build/references/recipes.md` in the existing format (Roles,
 Type, Problem, Measurement, Iteration, Needs, Output) and open a PR.
