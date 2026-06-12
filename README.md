@@ -57,7 +57,8 @@ It will not build a loop nobody needs.
 The skill ships a recipe gallery (`skills/build-a-loop/references/recipes.md`)
 with proven shapes: PR review SLA watcher, support queue digest, competitor
 changelog watcher, metrics anomaly digest, campaign link health check, and
-more. Recipes are starting points, not templates it forces on you.
+more. Browse it any time with `/loops:recipes` (or ask "what loops could I
+build?"). Recipes are starting points, not templates it forces on you.
 
 Before any launch, the design is tested live: one full iteration runs
 read-only, with outward messages shown as drafts instead of sent. Both times
