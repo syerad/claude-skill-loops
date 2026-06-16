@@ -137,8 +137,6 @@ top, run state in `state/`, logs in `logs/`, reports in `output/`.
   steps, guardrails
 - `skills/status/SKILL.md` - the health overview
 - `skills/recipes/SKILL.md` - the recipe browser
-- `docs/superpowers/` - design specs and implementation plans for the
-  plugin itself
 
 ## Updating
 

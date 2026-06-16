@@ -3,3 +3,4 @@ tasks/
 .claude/
 .DS_Store
 *.csv
+docs/superpowers/
